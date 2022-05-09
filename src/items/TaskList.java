@@ -14,6 +14,13 @@ public class TaskList {
     }
 
     /***
+     * Methods
+     */
+    public void addTask(Task task) {
+        tasks.add(task);
+    }
+
+    /***
      * Getters and setters
      */
     public void setName(String newName){
