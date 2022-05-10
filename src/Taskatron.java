@@ -18,11 +18,11 @@ public class Taskatron {
         /**
          First implementation, no GUI or database. No local saving.
          */
+        System.out.println("Welcome to TASKATRON 3000! For all your tasking needs. \n");
         while (true) {
-            System.out.println("Welcome to TASKATRON 3000! For all your tasking needs.");
             System.out.println("Please select from the options below:");
-            System.out.println("1. View all Lists.");
-            System.out.println("2. Create a new List");
+            System.out.println("1. View all Lists and their Tasks.");
+            System.out.println("2. Create a new List.");
             System.out.println("3. Create and add Task to a List.");
             System.out.println("4. Update name and/or description of a Task within a List.");
             System.out.println("5. Delete Task from List.");
@@ -31,6 +31,7 @@ public class Taskatron {
             System.out.println("0. Exit.");
 
             choice = input.nextInt();
+            input.nextLine();
 
             String[] nameAndDesc;
             String name = "";
@@ -39,11 +40,16 @@ public class Taskatron {
             Task task;
 
             switch (choice) {
+                case 0:
+                    System.out.println("Thank you for using Taskatron3000! Goodbye.");
+                    System.exit(0);
                 case 1: // View all Lists and Tasks
+                    System.out.println("Printing all Lists and their Tasks:");
                     for (TaskList list : listManager.getAllLists()) {
-                        System.out.println(list.toString());
-                        for (Task t : list.getTasks()) System.out.println(t.toString());
+                        System.out.println("List: " + list.toString());
+                        for (Task t : list.getTasks()) System.out.println("Task: " + t.toString());
                     }
+                    System.out.println();
                     break;
                 case 2: // Create a new List
                     System.out.println("Please enter the name of the new List:");
@@ -69,12 +75,8 @@ public class Taskatron {
                     taskList.getTasks().remove(task);
                     break;
                 case 6: // Delete List and its tasks
-                    // TODO
-                    // show all lists?
-                    // input - select list
                     taskList = uiHelper.getListFromUserInput();
-                    // foreach delete tasks
-                    // delete the list
+                    listManager.deleteList(taskList);
                     break;
                 case 7: // Move Task from List A to List B
                     // TODO

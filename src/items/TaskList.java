@@ -11,6 +11,7 @@ public class TaskList {
      */
     public TaskList(String name) {
         this.name = name;
+        tasks = new ArrayList<>();
     }
 
     /***

@@ -36,7 +36,7 @@ public class Task {
     }
 
     public String toString() {
-        // TODO
-        return null;
+        String task = "Name: " + getName() + ", Description: " + getDescription();
+        return task;
     }
 }

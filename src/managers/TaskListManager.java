@@ -12,7 +12,7 @@ public class TaskListManager {
      * Constructor
      */
     public TaskListManager() {
-
+        lists = new ArrayList<>();
     }
 
     /***
@@ -29,6 +29,7 @@ public class TaskListManager {
 
     public void createAndAddTask(TaskList list, String name, String description) {
         Task task = new Task(name, description);
+        System.out.println(task);
         list.addTask(task);
     }
 
@@ -51,5 +52,12 @@ public class TaskListManager {
             System.out.println("No task found with that index number.");
             return null;
         }
+    }
+
+    public void deleteList(TaskList taskList) {
+        for (int i = 0; i < taskList.getTasks().size(); i++) {
+            taskList.getTasks().remove(i);
+        }
+        lists.remove(taskList);
     }
 }

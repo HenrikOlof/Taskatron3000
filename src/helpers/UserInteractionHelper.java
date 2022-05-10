@@ -30,6 +30,7 @@ public class UserInteractionHelper {
             System.out.println(listManager.getAllLists().indexOf(list) + ": " + list.toString());
         }
         int listIndex = input.nextInt();
+        input.nextLine();
         return listManager.getListByIndex(listIndex);
     }
 
@@ -39,6 +40,7 @@ public class UserInteractionHelper {
             System.out.println(taskList.getTasks().indexOf(task) + ": " + task.toString());
         }
         int taskIndex = input.nextInt();
+        input.nextLine();
         return taskList.getTasks().get(taskIndex);
     }
 
