@@ -35,6 +35,15 @@ public class TaskList {
         return tasks;
     }
 
+    public Task getTaskByIndex(int index) {
+        try {
+            return tasks.get(index);
+        } catch (Exception e) {
+            System.out.println("No task with index " + index + " was found for list " + getName());
+            return null;
+        }
+    }
+
     public String toString() {
         // TODO
         return getName();

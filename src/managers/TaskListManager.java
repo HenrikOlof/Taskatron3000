@@ -45,12 +45,11 @@ public class TaskListManager {
     }
 
     public TaskList getListByIndex(int index) {
-        TaskList list = null;
         try {
-            list = lists.get(index);
+            return lists.get(index);
         } catch (Exception e) {
             System.out.println("No task found with that index number.");
+            return null;
         }
-        return list;
     }
 }
