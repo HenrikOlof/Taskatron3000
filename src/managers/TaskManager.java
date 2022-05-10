@@ -21,4 +21,12 @@ public class TaskManager {
         return tasks;
     }
 
+    public void setTaskName(Task task, String name) {
+        // TODO
+    }
+
+    public void setTaskDescription(Task task, String description) {
+        // TODO
+    }
+
 }

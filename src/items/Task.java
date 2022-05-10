@@ -34,4 +34,9 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    public String toString() {
+        // TODO
+        return null;
+    }
 }

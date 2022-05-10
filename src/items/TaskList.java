@@ -31,4 +31,13 @@ public class TaskList {
         return name;
     }
 
+    public ArrayList<Task> getTasks() {
+        return tasks;
+    }
+
+    public String toString() {
+        // TODO
+        return getName();
+    }
+
 }

@@ -18,8 +18,13 @@ public class TaskListManager {
     /***
      * Methods
      */
-    public ArrayList<TaskList> viewAllTaskLists() {
+    public ArrayList<TaskList> getAllLists() {
         return lists;
+    }
+
+    public void createList(String name) {
+        TaskList list = new TaskList(name);
+        lists.add(list);
     }
 
     public void createAndAddTask(TaskList list, String name, String description) {
@@ -27,7 +32,7 @@ public class TaskListManager {
         list.addTask(task);
     }
 
-    public void removeTask() {
+    public void removeTaskFromList() {
 
     }
 
@@ -35,7 +40,17 @@ public class TaskListManager {
 
     }
 
-    public void moveTask() {
+    public void moveTaskToList() {
 
+    }
+
+    public TaskList getListByIndex(int index) {
+        TaskList list = null;
+        try {
+            list = lists.get(index);
+        } catch (Exception e) {
+            System.out.println("No task found with that index number.");
+        }
+        return list;
     }
 }
