@@ -11,7 +11,7 @@ public class TaskManager {
      * Constructor
      */
     public TaskManager() {
-
+        tasks = new ArrayList<>();
     }
 
     /***
@@ -22,11 +22,11 @@ public class TaskManager {
     }
 
     public void setTaskName(Task task, String name) {
-        // TODO
+        task.setName(name);
     }
 
     public void setTaskDescription(Task task, String description) {
-        // TODO
+        task.setDescription(description);
     }
 
 }

@@ -33,16 +33,12 @@ public class TaskListManager {
         list.addTask(task);
     }
 
-    public void removeTaskFromList() {
-
+    public void addTask(Task task, TaskList taskList) {
+        taskList.addTask(task);
     }
 
-    public void removeList() {
-
-    }
-
-    public void moveTaskToList() {
-
+    public void removeTask(Task task, TaskList taskList) {
+        taskList.removeTask(task);
     }
 
     public TaskList getListByIndex(int index) {

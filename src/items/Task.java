@@ -8,12 +8,12 @@ public class Task {
      * Constructors
      */
     public Task(String name, String description) {
-        this.name = name;
-        this.description = description;
+        setName(name);
+        setDescription(description);
     }
 
     public Task(String name) {
-        this.name = name;
+        setName(name);
     }
 
     /***

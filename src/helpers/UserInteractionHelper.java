@@ -41,7 +41,7 @@ public class UserInteractionHelper {
         }
         int taskIndex = input.nextInt();
         input.nextLine();
-        return taskList.getTasks().get(taskIndex);
+        return taskList.getTaskByIndex(taskIndex);
     }
 
 }

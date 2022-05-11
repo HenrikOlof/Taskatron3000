@@ -10,7 +10,7 @@ public class TaskList {
      * Constructor
      */
     public TaskList(String name) {
-        this.name = name;
+        setName(name);
         tasks = new ArrayList<>();
     }
 
@@ -19,6 +19,10 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    public void removeTask(Task task) {
+        tasks.remove(task);
     }
 
     /***

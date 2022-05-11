@@ -35,7 +35,6 @@ public class Taskatron {
 
             String[] nameAndDesc;
             String name = "";
-            String description = "";
             TaskList taskList;
             Task task;
 
@@ -78,16 +77,12 @@ public class Taskatron {
                     taskList = uiHelper.getListFromUserInput();
                     listManager.deleteList(taskList);
                     break;
-                case 7: // Move Task from List A to List B
-                    // TODO
-                    // show all lists?
-                    // input - select list A
-                    // show all tasks
-                    // input - select task
-                    // show all lists
-                    // input - select list B
-                    // remove task from list A
-                    // add task to list B
+                case 7: // Move Task from one List to another
+                    TaskList listOne = uiHelper.getListFromUserInput();
+                    task = uiHelper.getTaskFromUserInput(listOne);
+                    TaskList listTwo = uiHelper.getListFromUserInput();
+                    listManager.addTask(task, listTwo);
+                    listManager.removeTask(task, listTwo);
                     break;
                 default:
                     break;
