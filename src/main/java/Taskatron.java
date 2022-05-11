@@ -1,3 +1,4 @@
+import helpers.DatabaseHelper;
 import helpers.UserInteractionHelper;
 import items.Task;
 import items.TaskList;
@@ -7,6 +8,10 @@ import managers.TaskManager;
 import java.util.Scanner;
 
 public class Taskatron {
+    // Wow, plaintext! So secure!
+    static String databaseUrl = "jdbc:mysql://localhost:3306/taskatron?connectionTimeZone=UTC&autoReconnect=true&useSSL=false";
+    static String databaseUsername = "root";
+    static String databasePassword = "root";
 
     public static void main(String args[]) {
         Scanner input = new Scanner(System.in);
@@ -14,6 +19,7 @@ public class Taskatron {
         TaskListManager listManager = new TaskListManager();
         TaskManager taskManager = new TaskManager();
         UserInteractionHelper uiHelper = new UserInteractionHelper(input, listManager);
+        DatabaseHelper databaseHelper = new DatabaseHelper(databaseUrl, databaseUsername, databasePassword);
 
         /**
          First implementation, no GUI or database. No local saving.
