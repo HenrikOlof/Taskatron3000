@@ -1,19 +1,20 @@
 package items;
 
-public class Task {
+import java.io.Serializable;
+
+public class Task implements Serializable {
+    private int id;
     private String name;
     private String description;
+    private int taskListId;
 
     /***
      * Constructors
      */
-    public Task(String name, String description) {
+    public Task(String name, String description, int taskListId) {
         setName(name);
         setDescription(description);
-    }
-
-    public Task(String name) {
-        setName(name);
+        setTaskList(taskListId);
     }
 
     /***
@@ -25,6 +26,10 @@ public class Task {
 
     public void setDescription(String newDescription) {
         description = newDescription;
+    }
+
+    public void setTaskList(int listId) {
+        taskListId = listId;
     }
 
     public String getName(){

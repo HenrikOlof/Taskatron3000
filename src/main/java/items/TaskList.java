@@ -1,8 +1,10 @@
 package items;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TaskList {
+public class TaskList implements Serializable {
+    private int id;
     private String name;
     private ArrayList<Task> tasks;
 
@@ -34,6 +36,10 @@ public class TaskList {
 
     public String getName() {
         return name;
+    }
+
+    public int getId() {
+        return id;
     }
 
     public ArrayList<Task> getTasks() {

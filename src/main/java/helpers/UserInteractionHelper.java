@@ -24,14 +24,12 @@ public class UserInteractionHelper {
         return nameAndDesc;
     }
 
-    public TaskList getListFromUserInput() {
+    public int getListFromUserInput() {
         System.out.println("Which List?");
-        for (TaskList list : listManager.getAllLists()) {
-            System.out.println(listManager.getAllLists().indexOf(list) + ": " + list.toString());
-        }
+        listManager.printAllLists();
         int listIndex = input.nextInt();
         input.nextLine();
-        return listManager.getListByIndex(listIndex);
+        return listIndex;
     }
 
     public Task getTaskFromUserInput(TaskList taskList) {
