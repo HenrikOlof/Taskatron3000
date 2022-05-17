@@ -29,12 +29,12 @@ public class TaskManager {
         dbHelper.enterTaskIntoDB(name, description);
     }
 
-    public void setTaskName(Task task, String name) {
-        task.setName(name);
+    public void setTaskName(int taskId, String name) {
+        dbHelper.setTaskName(taskId, name);
     }
 
-    public void setTaskDescription(Task task, String description) {
-        task.setDescription(description);
+    public void setTaskDescription(int taskId, String description) {
+        dbHelper.setTaskDescription(taskId, description);
     }
 
     public void printAllTasks() {
@@ -42,10 +42,15 @@ public class TaskManager {
         if (allTasksDetails.size() == 0) {
             System.out.println("The table 'tasks' seems to be empty.");
         } else {
-            for (String list : allTasksDetails) {
-                System.out.println(list);
+            for (String task : allTasksDetails) {
+                System.out.println("TASK: " + task);
             }
         }
     }
 
+    public void printTasksForList(int taskListId) {
+        for (String task : dbHelper.getAllTasksInList(taskListId)) {
+            System.out.println(task);
+        }
+    }
 }

@@ -3,16 +3,19 @@ package helpers;
 import items.Task;
 import items.TaskList;
 import managers.TaskListManager;
+import managers.TaskManager;
 
 import java.util.Scanner;
 
 public class UserInteractionHelper {
     Scanner input;
     TaskListManager listManager;
+    TaskManager taskManager;
 
-    public UserInteractionHelper(Scanner input, TaskListManager listManager) {
+    public UserInteractionHelper(Scanner input, TaskListManager listManager, TaskManager taskManager) {
         this.input = input;
         this.listManager = listManager;
+        this.taskManager = taskManager;
     }
 
     public String[] getNameAndDescriptionFromUser() {
@@ -32,14 +35,12 @@ public class UserInteractionHelper {
         return listIndex;
     }
 
-    public Task getTaskFromUserInput(TaskList taskList) {
+    public int getTaskFromUserInput(int taskListId) {
         System.out.println("Which Task?");
-        for (Task task : taskList.getTasks()) {
-            System.out.println(taskList.getTasks().indexOf(task) + ": " + task.toString());
-        }
+        taskManager.printTasksForList(taskListId);
         int taskIndex = input.nextInt();
         input.nextLine();
-        return taskList.getTaskByIndex(taskIndex);
+        return taskIndex;
     }
 
 }

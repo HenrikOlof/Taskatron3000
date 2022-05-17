@@ -1,10 +1,5 @@
 package helpers;
-import items.Task;
-import items.TaskList;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -41,22 +36,12 @@ public class DatabaseHelper {
 
     public ArrayList<String> getAllTasks() {
         String statement = "SELECT * FROM tasks";
-        ArrayList<String> output = new ArrayList<>();
-        try (Statement stmt = databaseConnection.createStatement()) {
-            ResultSet rs = stmt.executeQuery(statement);
-            while(rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");
-                String description = rs.getString("description");
-                int list_id = rs.getInt("list_id");
-                String row = "id: " + id + ", name: " + name + ", description: " + description + ", list_id:  " + list_id;
-                output.add(row);
-            }
-            return output;
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return null;
-        }
+        return extractTasksFromDatabaseAsArrayList(statement);
+    }
+
+    public ArrayList<String> getAllTasksInList(int taskListId) {
+        String statement = "SELECT * FROM tasks WHERE list_id = " + taskListId + ";";
+        return extractTasksFromDatabaseAsArrayList(statement);
     }
 
     public void enterListIntoDB(String name) throws SQLException {
@@ -88,7 +73,54 @@ public class DatabaseHelper {
         }
     }
 
-    public void updateTaskForeignKey(String name, int taskListId) { // TODO change name getter to id getter
-        // TODO get the task, then create a new statement where we update the tasks list_id
+    public void setTaskForeignKey(String name, int taskListId) { // TODO change name getter to id getter
+        String statement = "UPDATE tasks SET list_id = " + taskListId +
+                " WHERE name LIKE '" + name + "';";
+        try(Statement stmt = databaseConnection.createStatement()) {
+            stmt.executeUpdate(statement);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setTaskName(int taskId, String name) {
+        String statement = "UPDATE tasks SET name = '" + name +
+                "' WHERE id LIKE '" + taskId + "';";
+        try(Statement stmt = databaseConnection.createStatement()) {
+            stmt.executeUpdate(statement);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setTaskDescription(int taskId, String description) {
+        String statement = "UPDATE tasks SET description = '" + description +
+                "' WHERE id LIKE '" + taskId + "';";
+        try(Statement stmt = databaseConnection.createStatement()) {
+            stmt.executeUpdate(statement);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Help methods
+
+    private ArrayList<String> extractTasksFromDatabaseAsArrayList(String statement) {
+        ArrayList<String> output = new ArrayList<>();
+        try (Statement stmt = databaseConnection.createStatement()) {
+            ResultSet rs = stmt.executeQuery(statement);
+            while(rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                String description = rs.getString("description");
+                int list_id = rs.getInt("list_id");
+                String row = "id: " + id + ", name: " + name + ", description: " + description + ", list_id:  " + list_id;
+                output.add(row);
+            }
+            return output;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 }

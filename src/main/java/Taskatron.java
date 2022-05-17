@@ -1,7 +1,6 @@
 import helpers.DatabaseHelper;
 import helpers.UserInteractionHelper;
 import items.Task;
-import items.TaskList;
 import managers.TaskListManager;
 import managers.TaskManager;
 
@@ -19,7 +18,7 @@ public class Taskatron {
         DatabaseHelper databaseHelper = new DatabaseHelper(databaseUrl, databaseUsername, databasePassword);
         TaskListManager listManager = new TaskListManager(databaseHelper);
         TaskManager taskManager = new TaskManager(databaseHelper);
-        UserInteractionHelper uiHelper = new UserInteractionHelper(input, listManager);
+        UserInteractionHelper uiHelper = new UserInteractionHelper(input, listManager, taskManager);
 
         /**
          First implementation, no GUI or database. No local saving.
@@ -30,7 +29,7 @@ public class Taskatron {
             System.out.println("1. View all Lists and their Tasks.");
             System.out.println("2. Create a new List.");
             System.out.println("3. Create and add Task to a List.");
-            System.out.println("4. Update name and/or description of a Task within a List.");
+            System.out.println("4. Update name and description of a Task within a List.");
             System.out.println("5. Delete Task from List.");
             System.out.println("6. Delete a List (including Tasks).");
             System.out.println("7. Move Task from one List to another.");
@@ -42,7 +41,7 @@ public class Taskatron {
             String[] nameAndDesc;
             String name = "";
             int taskListId;
-            Task task;
+            int taskId;
 
             switch (choice) {
                 case 0:
@@ -63,16 +62,16 @@ public class Taskatron {
                     taskListId = uiHelper.getListFromUserInput();
                     if (!databaseHelper.checkIdValidity(taskListId)) break;
                     nameAndDesc = uiHelper.getNameAndDescriptionFromUser();
-                    listManager.createAndAddTask(taskListId, nameAndDesc[0], nameAndDesc[1]);
+                    listManager.createAndAddTaskToList(taskListId, nameAndDesc[0], nameAndDesc[1]);
                     break;
-                /**case 4: // Update name and/or description of a Task within a List
+                case 4: // Update name and description of a Task within a List
                     taskListId = uiHelper.getListFromUserInput();
-                    task = uiHelper.getTaskFromUserInput(taskListId);
+                    taskId = uiHelper.getTaskFromUserInput(taskListId);
                     nameAndDesc = uiHelper.getNameAndDescriptionFromUser();
-                    taskManager.setTaskName(task, nameAndDesc[0]);
-                    taskManager.setTaskDescription(task, nameAndDesc[1]);
+                    taskManager.setTaskName(taskId, nameAndDesc[0]);
+                    taskManager.setTaskDescription(taskId, nameAndDesc[1]);
                     break;
-                case 5: // Delete Task from List
+                /**case 5: // Delete Task from List
                     taskListId = uiHelper.getListFromUserInput();
                     task = uiHelper.getTaskFromUserInput(taskListId);
                     taskListId.getTasks().remove(task);

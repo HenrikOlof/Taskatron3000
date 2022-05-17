@@ -4,9 +4,7 @@ import helpers.DatabaseHelper;
 import items.Task;
 import items.TaskList;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 
 public class TaskListManager {
@@ -38,10 +36,9 @@ public class TaskListManager {
         }
     }
 
-    public void createAndAddTask(int taskListId, String name, String description) throws SQLException{
+    public void createAndAddTaskToList(int taskListId, String name, String description) throws SQLException{
         dbHelper.enterTaskIntoDB(name, description);
-        // TODO
-        dbHelper.updateTaskForeignKey(name, taskListId);
+        dbHelper.setTaskForeignKey(name, taskListId);
     }
 
     public void addTask(Task task, TaskList taskList) {
@@ -74,7 +71,7 @@ public class TaskListManager {
             System.out.println("The table 'lists' seems to be empty.");
         } else {
             for (String list : allListsDetails) {
-                System.out.println(list);
+                System.out.println("LIST: " + list);
             }
         }
     }
