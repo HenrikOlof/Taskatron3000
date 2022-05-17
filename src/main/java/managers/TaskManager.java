@@ -25,8 +25,8 @@ public class TaskManager {
         return tasks;
     }
 
-    public void createTask(String name, String description) throws SQLException {
-        dbHelper.enterTaskIntoDB(name, description);
+    public int createTask(String name, String description) throws SQLException {
+        return dbHelper.enterTaskIntoDB(name, description);
     }
 
     public void setTaskName(int taskId, String name) {
@@ -38,18 +38,18 @@ public class TaskManager {
     }
 
     public void printAllTasks() {
-        ArrayList<String> allTasksDetails = dbHelper.getAllTasks();
-        if (allTasksDetails.size() == 0) {
+        ArrayList<Task> allTasks = dbHelper.getAllTasks();
+        if (allTasks.size() == 0) {
             System.out.println("The table 'tasks' seems to be empty.");
         } else {
-            for (String task : allTasksDetails) {
-                System.out.println("TASK: " + task);
+            for (Task task : allTasks) {
+                System.out.println(task);
             }
         }
     }
 
     public void printTasksForList(int taskListId) {
-        for (String task : dbHelper.getAllTasksInList(taskListId)) {
+        for (Task task : dbHelper.getAllTasksInList(taskListId)) {
             System.out.println(task);
         }
     }

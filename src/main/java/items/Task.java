@@ -11,25 +11,15 @@ public class Task implements Serializable {
     /***
      * Constructors
      */
-    public Task(String name, String description, int taskListId) {
-        setName(name);
-        setDescription(description);
-        setTaskList(taskListId);
+    public Task(int id, String name, String description, int taskListId) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.taskListId = taskListId;
     }
 
-    /***
-     * Getters and setters
-     */
-    public void setName(String newName) {
-        name = newName;
-    }
-
-    public void setDescription(String newDescription) {
-        description = newDescription;
-    }
-
-    public void setTaskList(int listId) {
-        taskListId = listId;
+    public int getId() {
+        return id;
     }
 
     public String getName(){
@@ -40,8 +30,12 @@ public class Task implements Serializable {
         return description;
     }
 
+    public int getTaskListId() {
+        return taskListId;
+    }
+
     public String toString() {
-        String task = "Name: " + getName() + ", Description: " + getDescription();
-        return task;
+        return getId() + ") name: " + getName() + ", Description: " + getDescription() +
+                ". Belongs to list " + getTaskListId();
     }
 }

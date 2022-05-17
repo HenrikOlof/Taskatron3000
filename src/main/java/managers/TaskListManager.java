@@ -27,8 +27,6 @@ public class TaskListManager {
     }
 
     public void createList(String name) {
-        TaskList list = new TaskList(name);
-        lists.add(list);
         try {
             dbHelper.enterListIntoDB(name);
         } catch (SQLException e) {
@@ -36,17 +34,17 @@ public class TaskListManager {
         }
     }
 
-    public void createAndAddTaskToList(int taskListId, String name, String description) throws SQLException{
-        dbHelper.enterTaskIntoDB(name, description);
-        dbHelper.setTaskForeignKey(name, taskListId);
+    public void createAndAddTaskToList(TaskManager taskMan, int taskListId, String name, String description) throws SQLException{
+        int taskId = taskMan.createTask(name, description);
+        if (taskId == 0) {
+            System.out.println("Something went wrong; task generated with id key 0.");
+        } else {
+            dbHelper.setTaskForeignKey(taskId, taskListId);
+        }
     }
 
-    public void addTask(Task task, TaskList taskList) {
-        taskList.addTask(task); // TODO set the list_id for the task to the lists id
-    }
-
-    public void removeTask(Task task, TaskList taskList) {
-        taskList.removeTask(task);
+    public void removeTaskFromList(int taskId) {
+        dbHelper.setTaskForeignKey(taskId, 0);
     }
 
     public TaskList getListByIndex(int index) {
@@ -58,20 +56,21 @@ public class TaskListManager {
         }
     }
 
-    public void deleteList(TaskList taskList) {
-        for (int i = 0; i < taskList.getTasks().size(); i++) {
-            taskList.getTasks().remove(i);
+    public void deleteListAndItsTasks(int taskListId) {
+        ArrayList<Task> tasks = dbHelper.getAllTasksInList(taskListId);
+        for (Task task : tasks) {
+            dbHelper.deleteTask(task.getId());
         }
-        lists.remove(taskList);
+        dbHelper.deleteList(taskListId);
     }
 
     public void printAllLists() {
-        ArrayList<String> allListsDetails = dbHelper.getAllLists();
+        ArrayList<TaskList> allListsDetails = dbHelper.getAllLists();
         if (allListsDetails.size() == 0) {
             System.out.println("The table 'lists' seems to be empty.");
         } else {
-            for (String list : allListsDetails) {
-                System.out.println("LIST: " + list);
+            for (TaskList list : allListsDetails) {
+                System.out.println(list);
             }
         }
     }

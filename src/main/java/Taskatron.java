@@ -1,6 +1,5 @@
 import helpers.DatabaseHelper;
 import helpers.UserInteractionHelper;
-import items.Task;
 import managers.TaskListManager;
 import managers.TaskManager;
 
@@ -60,9 +59,9 @@ public class Taskatron {
                     break;
                 case 3: // Create and add Task to a List
                     taskListId = uiHelper.getListFromUserInput();
-                    if (!databaseHelper.checkIdValidity(taskListId)) break;
+                    if (!databaseHelper.checkListIdValidity(taskListId)) break;
                     nameAndDesc = uiHelper.getNameAndDescriptionFromUser();
-                    listManager.createAndAddTaskToList(taskListId, nameAndDesc[0], nameAndDesc[1]);
+                    listManager.createAndAddTaskToList(taskManager, taskListId, nameAndDesc[0], nameAndDesc[1]);
                     break;
                 case 4: // Update name and description of a Task within a List
                     taskListId = uiHelper.getListFromUserInput();
@@ -71,16 +70,16 @@ public class Taskatron {
                     taskManager.setTaskName(taskId, nameAndDesc[0]);
                     taskManager.setTaskDescription(taskId, nameAndDesc[1]);
                     break;
-                /**case 5: // Delete Task from List
+                case 5: // Delete Task from List
                     taskListId = uiHelper.getListFromUserInput();
-                    task = uiHelper.getTaskFromUserInput(taskListId);
-                    taskListId.getTasks().remove(task);
+                    taskId = uiHelper.getTaskFromUserInput(taskListId);
+                    listManager.removeTaskFromList(taskId);
                     break;
                 case 6: // Delete List and its tasks
                     taskListId = uiHelper.getListFromUserInput();
-                    listManager.deleteList(taskListId);
+                    listManager.deleteListAndItsTasks(taskListId);
                     break;
-                case 7: // Move Task from one List to another
+                /**case 7: // Move Task from one List to another
                     TaskList listOne = uiHelper.getListFromUserInput();
                     task = uiHelper.getTaskFromUserInput(listOne);
                     TaskList listTwo = uiHelper.getListFromUserInput();
