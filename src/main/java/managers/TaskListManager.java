@@ -43,25 +43,24 @@ public class TaskListManager {
         }
     }
 
+    public void addTaskToList(int taskListId, int taskId) {
+        dbHelper.setTaskForeignKey(taskId, taskListId);
+    }
+
     public void removeTaskFromList(int taskId) {
         dbHelper.setTaskForeignKey(taskId, 0);
     }
 
-    public TaskList getListByIndex(int index) {
-        try {
-            return lists.get(index);
-        } catch (Exception e) {
-            System.out.println("No task found with that index number.");
-            return null;
-        }
+    public void deleteList(int taskListId) {
+        dbHelper.deleteList(taskListId);
     }
 
-    public void deleteListAndItsTasks(int taskListId) {
+    public void deleteListAndItsTasks(int taskListId, TaskManager taskManager) {
         ArrayList<Task> tasks = dbHelper.getAllTasksInList(taskListId);
         for (Task task : tasks) {
-            dbHelper.deleteTask(task.getId());
+            taskManager.deleteTask(task.getId());
         }
-        dbHelper.deleteList(taskListId);
+        deleteList(taskListId);
     }
 
     public void printAllLists() {

@@ -53,4 +53,8 @@ public class TaskManager {
             System.out.println(task);
         }
     }
+
+    public void deleteTask(int taskId) {
+        dbHelper.deleteTask(taskId);
+    }
 }

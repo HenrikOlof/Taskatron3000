@@ -73,19 +73,19 @@ public class Taskatron {
                 case 5: // Delete Task from List
                     taskListId = uiHelper.getListFromUserInput();
                     taskId = uiHelper.getTaskFromUserInput(taskListId);
-                    listManager.removeTaskFromList(taskId);
+                    taskManager.deleteTask(taskId);
                     break;
                 case 6: // Delete List and its tasks
                     taskListId = uiHelper.getListFromUserInput();
-                    listManager.deleteListAndItsTasks(taskListId);
+                    listManager.deleteListAndItsTasks(taskListId, taskManager);
                     break;
-                /**case 7: // Move Task from one List to another
-                    TaskList listOne = uiHelper.getListFromUserInput();
-                    task = uiHelper.getTaskFromUserInput(listOne);
-                    TaskList listTwo = uiHelper.getListFromUserInput();
-                    listManager.addTask(task, listTwo);
-                    listManager.removeTask(task, listTwo);
-                    break;*/
+                case 7: // Move Task from one List to another
+                    int listOne = uiHelper.getListFromUserInput();
+                    taskId = uiHelper.getTaskFromUserInput(listOne);
+                    int listTwo = uiHelper.getListFromUserInput();
+                    listManager.removeTaskFromList(taskId);
+                    listManager.addTaskToList(listTwo, taskId);
+                    break;
                 default:
                     break;
             }
