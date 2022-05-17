@@ -21,9 +21,6 @@ public class Taskatron {
         UserInteractionHelper uiHelper = new UserInteractionHelper(input, listManager, taskManager);
         GUserInterfaceHelper interfaceHelper = new GUserInterfaceHelper(taskManager, listManager);
 
-        /**
-         First implementation, no GUI or database. No local saving.
-         */
         System.out.println("Welcome to TASKATRON 3000! For all your tasking needs. \n");
         while (true) {
             System.out.println("Please select from the options below:");
