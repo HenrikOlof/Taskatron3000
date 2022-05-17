@@ -6,16 +6,18 @@ import managers.TaskListManager;
 import managers.TaskManager;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GUserInterfaceHelper{
     ActionFrame frame;
-    JButton button;
 
     public GUserInterfaceHelper(TaskManager taskMan, TaskListManager taskListMan) {
         setUpFrame(taskMan, taskListMan);
+        setUpGreetingAndInfoTexts();
         setUpButtons();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
@@ -23,12 +25,18 @@ public class GUserInterfaceHelper{
         frame = new ActionFrame("My First GUI", taskMan, taskListMan);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,600);
-        // setUpGreetingAndInfoTexts();
+        BoxLayout boxlayout = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
+        frame.getContentPane().setLayout(boxlayout);
+    }
+
+    private void setUpGreetingAndInfoTexts() {
+        JLabel greeting = new JLabel("Welcome to TASKATRON 3000! For all your tasking needs.");
+        frame.add(greeting);
     }
 
     private void setUpButtons() {
         setUpViewAllButton();
-        // setUpCreateListButton();
+        setUpCreateListButton();
         // setUpCreateAndAddTaskButton();
         // setUpUpdateTaskButton();
         // setUpDeleteTaskButton();
@@ -38,10 +46,17 @@ public class GUserInterfaceHelper{
     }
 
     private void setUpViewAllButton() {
-        button = new JButton("P R E S S");
+        JButton button = new JButton("View All Lists and Tasks");
         frame.getContentPane().add(button);
         button.addActionListener(frame);
         button.setActionCommand("displayAll");
+    }
+
+    private void setUpCreateListButton() {
+        JButton button = new JButton("Create a New List // TODO");
+        frame.getContentPane().add(button);
+        button.addActionListener(frame);
+        button.setActionCommand("createList");
     }
 
 }
