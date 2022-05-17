@@ -1,4 +1,5 @@
 import helpers.DatabaseHelper;
+import helpers.GUserInterfaceHelper;
 import helpers.UserInteractionHelper;
 import managers.TaskListManager;
 import managers.TaskManager;
@@ -18,6 +19,7 @@ public class Taskatron {
         TaskListManager listManager = new TaskListManager(databaseHelper);
         TaskManager taskManager = new TaskManager(databaseHelper);
         UserInteractionHelper uiHelper = new UserInteractionHelper(input, listManager, taskManager);
+        GUserInterfaceHelper interfaceHelper = new GUserInterfaceHelper(taskManager, listManager);
 
         /**
          First implementation, no GUI or database. No local saving.
