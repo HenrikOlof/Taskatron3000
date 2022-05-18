@@ -24,7 +24,7 @@ public class TaskList implements Serializable {
     }
 
     public String toString() {
-        return getId() + ") name: " + name + ", number of tasks: // TODO";
+        return getId() + ") name: " + name;
     }
 
 }

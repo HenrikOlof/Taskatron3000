@@ -22,7 +22,7 @@ public class GUserInterfaceHelper{
     }
 
     private void setUpFrame(TaskManager taskMan, TaskListManager taskListMan) {
-        frame = new ActionFrame("My First GUI", taskMan, taskListMan);
+        frame = new ActionFrame("TASKATRON 3000", taskMan, taskListMan);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(600,600);
         BoxLayout boxlayout = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);

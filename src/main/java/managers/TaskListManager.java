@@ -23,7 +23,7 @@ public class TaskListManager {
      * Methods
      */
     public ArrayList<TaskList> getAllLists() {
-        return lists;
+        return dbHelper.getAllLists();
     }
 
     public void createList(String name) {
