@@ -38,7 +38,7 @@ public class GUserInterfaceHelper{
         setUpViewAllButton();
         setUpCreateListButton();
         setUpCreateAndAddTaskButton();
-        // setUpUpdateTaskButton();
+        setUpUpdateTaskButton();
         // setUpDeleteTaskButton();
         // setUpDeleteListButton();
         // setUpMoveTaskButton();
@@ -64,6 +64,13 @@ public class GUserInterfaceHelper{
         frame.getContentPane().add(button);
         button.addActionListener(frame);
         button.setActionCommand("createAndAddTask");
+    }
+
+    private void setUpUpdateTaskButton() {
+        JButton button = new JButton("Select a Task and give it a new Name and/or Description");
+        frame.getContentPane().add(button);
+        button.addActionListener(frame);
+        button.setActionCommand("updateTask");
     }
 
 }

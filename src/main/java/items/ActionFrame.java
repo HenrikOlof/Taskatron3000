@@ -15,6 +15,7 @@ public class ActionFrame extends JFrame implements ActionListener {
     public static final String displayAll = "Displaying all Lists and their Tasks\n";
     public static final String createList = "Create a List";
     public static final String createAndAddTask = "Create a Task and add it to a List";
+    public static final String editTask = "Update the Name and Description of a Task";
 
     TaskManager taskManager;
     TaskListManager listManager;
@@ -31,6 +32,9 @@ public class ActionFrame extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         String action = actionEvent.getActionCommand();
+        ArrayList<JTextField> inputs;
+        JTextArea jTextArea;
+        MultTextInputListener multTextInput;
         switch (action) {
             case "displayAll":
                 frame = new JFrame(displayAll);
@@ -51,39 +55,34 @@ public class ActionFrame extends JFrame implements ActionListener {
                 break;
             case "createList": // Create a new List
                 frame = new JFrame(createList);
-                ArrayList<JTextField> singleTextField = new ArrayList<>();
-                JTextField input = new JTextField(20);
-                singleTextField.add(input);
+                ArrayList<JTextField> singleTextField = addJTextFields(1);
                 JTextArea textArea = new JTextArea("Please enter the name of the new List");
                 button = new JButton("Enter");
-                TextInputListener listNameListener = new TextInputListener(frame, input, taskManager, listManager);
+                TextInputListener listNameListener = new TextInputListener(frame, singleTextField.get(0), taskManager, listManager);
                 button.addActionListener(listNameListener);
                 createPromptAndButtonWithInput(frame, textArea, button, singleTextField);
                 break;
             case "createAndAddTask": // Create and add Task to a List
                 frame = new JFrame(createAndAddTask);
-                ArrayList<JTextField> inputs = new ArrayList<>();
-                inputs.add(new JTextField(20));
-                inputs.add(new JTextField(20));
-                inputs.add(new JTextField(20));
-                JTextArea pickListArea = new JTextArea("Please enter the ID number of the List to add a Task to,\n" +
-                        " As well as the Name of the new Task and what it entails.");
+                inputs = addJTextFields(3);
+                jTextArea = new JTextArea("Please enter the ID number of the List to add a Task to,\n" +
+                        " As well as the Name of the new Task and what it entails.\n");
                 for (TaskList list : listManager.getAllLists()) {
-                    pickListArea.append(list.toString() + "\n");
+                    jTextArea.append(list.toString() + "\n");
                 }
-                MultTextInputListener multTextInput = new MultTextInputListener(frame, inputs, taskManager, listManager);
-                button = new JButton("Enter");
-                button.addActionListener(multTextInput);
-                createPromptAndButtonWithInput(frame, pickListArea, button, inputs);
+                handleCaseMultipleUserInputs(inputs, jTextArea);
                 break;
-            /**case "updateTask": // Update name and description of a Task within a List
-             taskListId = uiHelper.getListFromUserInput();
-             taskId = uiHelper.getTaskFromUserInput(taskListId);
-             nameAndDesc = uiHelper.getNameAndDescriptionFromUser();
-             taskManager.setTaskName(taskId, nameAndDesc[0]);
-             taskManager.setTaskDescription(taskId, nameAndDesc[1]);
-             break;
-             case "deleteTask": // Delete Task from List
+            case "updateTask": // Update name and description of a Task within a List
+                frame = new JFrame(editTask);
+                inputs = addJTextFields(3);
+                jTextArea = new JTextArea("Please enter the ID of the Task to be changed,\n" +
+                        "as well as the new Name and descriptions\n");
+                for (Task task : taskManager.getAllTasks()) {
+                    jTextArea.append(task.toString() + "\n");
+                }
+                handleCaseMultipleUserInputs(inputs, jTextArea);
+                break;
+             /**case "deleteTask": // Delete Task from List
              taskListId = uiHelper.getListFromUserInput();
              taskId = uiHelper.getTaskFromUserInput(taskListId);
              taskManager.deleteTask(taskId);
@@ -102,6 +101,20 @@ public class ActionFrame extends JFrame implements ActionListener {
             default:
                 break;
         }
+    }
+
+    private ArrayList<JTextField> addJTextFields(int i) {
+        ArrayList<JTextField> inputs = new ArrayList<>();
+        for (int j = 0; j<i; j++)
+            inputs.add(new JTextField(20));
+        return inputs;
+    }
+
+    private void handleCaseMultipleUserInputs(ArrayList<JTextField> inputs, JTextArea jTextArea) {
+        MultTextInputListener multTextInputListener = new MultTextInputListener(frame, inputs, taskManager, listManager);
+        button = new JButton("Enter");
+        button.addActionListener(multTextInputListener);
+        createPromptAndButtonWithInput(frame, jTextArea, button, inputs);
     }
 
     private JPanel renderTextArea(JFrame frame, JTextArea textArea) {
@@ -160,8 +173,15 @@ public class ActionFrame extends JFrame implements ActionListener {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
-                frame.dispose();
+            } else if (frame.getTitle().equals(editTask)) {
+                String listIndexAsString = textFields.get(0).getText();
+                int taskId = parseIndexStringInput(listIndexAsString);
+                String taskName = textFields.get(1).getText();
+                String taskDescription = textFields.get(2).getText();
+                taskManager.setTaskName(taskId, taskName);
+                taskManager.setTaskDescription(taskId, taskDescription);
             }
+            frame.dispose();
         }
 
         private int parseIndexStringInput(String listIndexAsString) {
