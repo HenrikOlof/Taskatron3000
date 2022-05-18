@@ -35,7 +35,6 @@ public class Task implements Serializable {
     }
 
     public String toString() {
-        return getId() + ") name: " + getName() + ", Description: " + getDescription() +
-                ". Belongs to list " + getTaskListId();
+        return getId() + ") name: " + getName() + ", Description: " + getDescription();
     }
 }

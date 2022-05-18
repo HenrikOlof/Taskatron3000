@@ -7,14 +7,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TaskManager {
-    private ArrayList<Task> tasks;
     private DatabaseHelper dbHelper;
 
     /***
      * Constructor
      */
     public TaskManager(DatabaseHelper dbHelper) {
-        tasks = new ArrayList<>();
         this.dbHelper = dbHelper;
     }
 
@@ -22,7 +20,7 @@ public class TaskManager {
      * Methods
      */
     public ArrayList<Task> getAllTasks() {
-        return tasks;
+        return dbHelper.getAllTasks();
     }
 
     public int createTask(String name, String description) throws SQLException {

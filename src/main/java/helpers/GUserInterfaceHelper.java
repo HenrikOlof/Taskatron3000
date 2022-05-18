@@ -37,7 +37,7 @@ public class GUserInterfaceHelper{
     private void setUpButtons() {
         setUpViewAllButton();
         setUpCreateListButton();
-        // setUpCreateAndAddTaskButton();
+        setUpCreateAndAddTaskButton();
         // setUpUpdateTaskButton();
         // setUpDeleteTaskButton();
         // setUpDeleteListButton();
@@ -53,10 +53,17 @@ public class GUserInterfaceHelper{
     }
 
     private void setUpCreateListButton() {
-        JButton button = new JButton("Create a New List // TODO");
+        JButton button = new JButton("Create a New List");
         frame.getContentPane().add(button);
         button.addActionListener(frame);
         button.setActionCommand("createList");
+    }
+
+    private void setUpCreateAndAddTaskButton() {
+        JButton button = new JButton("Select a List and add a New Task to it");
+        frame.getContentPane().add(button);
+        button.addActionListener(frame);
+        button.setActionCommand("createAndAddTask");
     }
 
 }
