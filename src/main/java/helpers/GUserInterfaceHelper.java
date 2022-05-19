@@ -43,11 +43,11 @@ public class GUserInterfaceHelper{
     private void setUpButtons() {
         setUpButtonLabelAndCommand("View All Lists and Tasks", displayAll);
         setUpButtonLabelAndCommand("Create a New List", createList);
-        setUpButtonLabelAndCommand("Select a List and add a New Task to it", createAndAddTask);
-        setUpButtonLabelAndCommand("Select a Task and give it a new Name and Description", updateTask);
-        setUpButtonLabelAndCommand("Select a Task and delete it", deleteTask);
-        setUpButtonLabelAndCommand("Select a List and delete it along with its Tasks", deleteListAndTasks);
-        setUpButtonLabelAndCommand("Select a Task and move it to a new List", moveTask);
+        setUpButtonLabelAndCommand("Create a Task and add it to a List", createAndAddTask);
+        setUpButtonLabelAndCommand("Give a Task a new Name and Description", updateTask);
+        setUpButtonLabelAndCommand("Delete a Task", deleteTask);
+        setUpButtonLabelAndCommand("Delete a List (and its Tasks)", deleteListAndTasks);
+        setUpButtonLabelAndCommand("Move a Task to a new List", moveTask);
         setUpExitButton();
     }
 
