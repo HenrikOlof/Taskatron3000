@@ -3,12 +3,10 @@ import helpers.GUserInterfaceHelper;
 import managers.TaskListManager;
 import managers.TaskManager;
 
-import java.util.Scanner;
-
 import static constants.StringConstants.*;
 
 public class Taskatron {
-    static String databasePassword = "";
+    static String databasePassword = "HpKtZ4mH2o";
 
     public static void main(String args[]) {
         DatabaseHelper databaseHelper = new DatabaseHelper();
