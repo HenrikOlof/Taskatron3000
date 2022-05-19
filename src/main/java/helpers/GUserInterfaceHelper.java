@@ -1,19 +1,25 @@
 package helpers;
 
 import items.ActionFrame;
-import items.TaskList;
 import managers.TaskListManager;
 import managers.TaskManager;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static constants.StringConstants.*;
+
 public class GUserInterfaceHelper{
     ActionFrame frame;
-
+    TaskManager taskMan;
+    TaskListManager taskListMan;
     public GUserInterfaceHelper(TaskManager taskMan, TaskListManager taskListMan) {
+        this.taskMan = taskMan;
+        this.taskListMan = taskListMan;
+    }
+
+    public void setUpGui() {
         setUpFrame(taskMan, taskListMan);
         setUpGreetingAndInfoTexts();
         setUpButtons();
@@ -22,55 +28,46 @@ public class GUserInterfaceHelper{
     }
 
     private void setUpFrame(TaskManager taskMan, TaskListManager taskListMan) {
-        frame = new ActionFrame("TASKATRON 3000", taskMan, taskListMan);
+        frame = new ActionFrame(name, taskMan, taskListMan);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(600,600);
+        frame.setSize(600,300);
         BoxLayout boxlayout = new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS);
         frame.getContentPane().setLayout(boxlayout);
     }
 
     private void setUpGreetingAndInfoTexts() {
-        JLabel greeting = new JLabel("Welcome to TASKATRON 3000! For all your tasking needs.");
-        frame.add(greeting);
+        JLabel greetingPanel = new JLabel(greeting);
+        frame.add(greetingPanel);
     }
 
     private void setUpButtons() {
-        setUpViewAllButton();
-        setUpCreateListButton();
-        setUpCreateAndAddTaskButton();
-        setUpUpdateTaskButton();
-        // setUpDeleteTaskButton();
-        // setUpDeleteListButton();
-        // setUpMoveTaskButton();
-        // setUpExitButton();
+        // TODO move all these magic strings into StringConstants
+        setUpButtonLabelAndCommand("View All Lists and Tasks", displayAll);
+        setUpButtonLabelAndCommand("Create a New List", createList);
+        setUpButtonLabelAndCommand("Select a List and add a New Task to it", createAndAddTask);
+        setUpButtonLabelAndCommand("Select a Task and give it a new Name and Description", updateTask);
+        setUpButtonLabelAndCommand("Select a Task and delete it", deleteTask);
+        setUpButtonLabelAndCommand("Select a List and delete it along with its Tasks", deleteListAndTasks);
+        setUpButtonLabelAndCommand("Select a Task and move it to a new List", moveTask);
+        setUpExitButton();
     }
 
-    private void setUpViewAllButton() {
-        JButton button = new JButton("View All Lists and Tasks");
+    private void setUpButtonLabelAndCommand(String label, String command) {
+        JButton button = new JButton(label);
         frame.getContentPane().add(button);
         button.addActionListener(frame);
-        button.setActionCommand("displayAll");
+        button.setActionCommand(command);
     }
 
-    private void setUpCreateListButton() {
-        JButton button = new JButton("Create a New List");
+    private void setUpExitButton() {
+        JButton button = new JButton("EXIT");
         frame.getContentPane().add(button);
-        button.addActionListener(frame);
-        button.setActionCommand("createList");
-    }
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                frame.dispose();
+            }
+        });
 
-    private void setUpCreateAndAddTaskButton() {
-        JButton button = new JButton("Select a List and add a New Task to it");
-        frame.getContentPane().add(button);
-        button.addActionListener(frame);
-        button.setActionCommand("createAndAddTask");
     }
-
-    private void setUpUpdateTaskButton() {
-        JButton button = new JButton("Select a Task and give it a new Name and/or Description");
-        frame.getContentPane().add(button);
-        button.addActionListener(frame);
-        button.setActionCommand("updateTask");
-    }
-
 }

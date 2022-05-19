@@ -35,24 +35,15 @@ public class TaskManager {
         dbHelper.setTaskDescription(taskId, description);
     }
 
-    public void printAllTasks() {
-        ArrayList<Task> allTasks = dbHelper.getAllTasks();
-        if (allTasks.size() == 0) {
-            System.out.println("The table 'tasks' seems to be empty.");
-        } else {
-            for (Task task : allTasks) {
-                System.out.println(task);
-            }
-        }
-    }
-
-    public void printTasksForList(int taskListId) {
-        for (Task task : dbHelper.getAllTasksInList(taskListId)) {
-            System.out.println(task);
-        }
-    }
-
     public void deleteTask(int taskId) {
         dbHelper.deleteTask(taskId);
+    }
+
+    public boolean checkIfTaskExistsByIndex(int index) {
+        ArrayList<Task> tasks = getAllTasks();
+        for (Task task : tasks) {
+            if (task.getId() == index) return true;
+        }
+        return false;
     }
 }

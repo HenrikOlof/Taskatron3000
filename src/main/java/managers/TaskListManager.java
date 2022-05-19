@@ -63,14 +63,11 @@ public class TaskListManager {
         deleteList(taskListId);
     }
 
-    public void printAllLists() {
-        ArrayList<TaskList> allListsDetails = dbHelper.getAllLists();
-        if (allListsDetails.size() == 0) {
-            System.out.println("The table 'lists' seems to be empty.");
-        } else {
-            for (TaskList list : allListsDetails) {
-                System.out.println(list);
-            }
+    public boolean checkIfListExistsByIndex(int index) {
+        ArrayList<TaskList> lists = getAllLists();
+        for (TaskList list : lists) {
+            if (list.getId() == index) return true;
         }
+        return false;
     }
 }

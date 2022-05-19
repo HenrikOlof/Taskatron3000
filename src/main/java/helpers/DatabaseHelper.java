@@ -1,5 +1,6 @@
 package helpers;
 
+import com.mysql.cj.util.StringUtils;
 import items.Task;
 import items.TaskList;
 
@@ -11,7 +12,10 @@ public class DatabaseHelper {
 
     Connection databaseConnection;
 
-    public DatabaseHelper(String url, String username, String password) {
+    public DatabaseHelper() {
+    }
+
+    public void connectToDatabase(String url, String username, String password) {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             databaseConnection = DriverManager.getConnection(url, username, password);
