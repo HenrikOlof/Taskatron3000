@@ -6,8 +6,6 @@ import managers.TaskManager;
 import static constants.StringConstants.*;
 
 public class Taskatron {
-    static String databasePassword = "HpKtZ4mH2o";
-
     public static void main(String args[]) {
         DatabaseHelper databaseHelper = new DatabaseHelper();
         TaskListManager listManager = new TaskListManager(databaseHelper);

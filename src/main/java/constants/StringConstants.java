@@ -6,6 +6,8 @@ public class StringConstants {
      */
     public static String databaseUrl = "jdbc:mysql://remotemysql.com:3306/PwjAkVU3ae?useUnicode=true&characterEncoding=UTF-8&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=false";
     public static String databaseUsername = "PwjAkVU3ae";
+    public static String databasePassword = "HpKtZ4mH2o";
+
     /***
      * Short one-time strings
      */

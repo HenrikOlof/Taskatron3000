@@ -41,7 +41,6 @@ public class GUserInterfaceHelper{
     }
 
     private void setUpButtons() {
-        // TODO move all these magic strings into StringConstants
         setUpButtonLabelAndCommand("View All Lists and Tasks", displayAll);
         setUpButtonLabelAndCommand("Create a New List", createList);
         setUpButtonLabelAndCommand("Select a List and add a New Task to it", createAndAddTask);
